@@ -54,10 +54,11 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.essai1.outputs.page_url || steps.essai2.outputs.page_url }}
+      url: ${{ steps.essai1.outputs.page_url || steps.essai2.outputs.page_url || steps.essai3.outputs.page_url }}
     steps:
-      # Une publication prend ~20 s. Il arrive que GitHub Pages cale (06/11/2026) :
-      # on abandonne au bout de 5 min et on retente une fois, avant de déclarer l'échec.
+      # Une publication prend ~20 s à 2 min. GitHub Pages cale parfois (« Deployment failed,
+      # try again later », 2 fois le 06/11/2026) : jusqu'à 3 essais, espacés de plus en plus,
+      # avant de déclarer l'échec. Pendant ce temps, la version précédente reste en ligne.
       - name: Publier
         id: essai1
         uses: actions/deploy-pages@v5
@@ -65,7 +66,23 @@ jobs:
         with:
           timeout: 300000
 
-      - name: Publier (2e essai si GitHub Pages a calé)
+      - name: Pause avant le 2e essai
+        if: steps.essai1.outcome == 'failure'
+        run: sleep 90
+
+      - name: Publier (2e essai)
         id: essai2
         if: steps.essai1.outcome == 'failure'
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+        with:
+          timeout: 300000
+
+      - name: Pause avant le 3e essai
+        if: steps.essai1.outcome == 'failure' && steps.essai2.outcome == 'failure'
+        run: sleep 240
+
+      - name: Publier (3e et dernier essai)
+        id: essai3
+        if: steps.essai1.outcome == 'failure' && steps.essai2.outcome == 'failure'
         uses: actions/deploy-pages@v5

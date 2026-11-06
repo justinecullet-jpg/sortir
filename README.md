@@ -66,7 +66,7 @@ Le robot `.github/workflows/mise-a-jour.yml` tourne sur les serveurs de GitHub, 
 
 **Garde-fou** : si une source est en panne, ou si le nombre de sorties chute de plus de moitié, rien n'est publié. La version de la veille reste en ligne et GitHub t'envoie un e-mail d'échec.
 
-**Si GitHub Pages cale** (c'est arrivé le 06/11/2026 : publication restée « en cours » 10 min, sans erreur de notre côté) : le robot abandonne au bout de 5 min et retente une fois. Si le 2e essai échoue aussi, la version précédente reste en ligne et le passage suivant (12 h plus tard) republie tout.
+**Si GitHub Pages cale** (c'est arrivé deux fois le 06/11/2026 : publication restée « en cours », ou « Deployment failed, try again later », sans erreur de notre côté) : le robot fait jusqu'à 3 essais, avec une pause de 1 min 30 puis de 4 min entre eux. Si les trois échouent, la version précédente reste en ligne et le passage suivant (12 h plus tard) republie tout. Pour relancer tout de suite : onglet *Actions* → le passage en échec → *Re-run failed jobs*.
 
 `public/data/events.json` n'est pas versionné (voir `.gitignore`) : le robot le refabrique à chaque fois, ce qui garde le dépôt léger.
 
