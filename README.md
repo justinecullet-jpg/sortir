@@ -1,6 +1,6 @@
-# Sortir : swipe tes sorties à Paris (prototype v1.3, 06/11/2026)
+# Sortir : swipe tes sorties à Paris (prototype v1.4, 06/11/2026)
 
-> **Journal** · v1 : swipe, filtres, liste, partage · v1.1 : calendrier dans « Mes sorties » · v1.2 : « Ajouter à mon agenda » · v1.3 : vue Carte, affichage tablette et ordinateur, robot de mise en ligne
+> **Journal** · v1 : swipe, filtres, liste, partage · v1.1 : calendrier dans « Mes sorties » · v1.2 : « Ajouter à mon agenda » · v1.3 : vue Carte, affichage tablette et ordinateur, robot de mise en ligne · v1.4 : filtre accessibilité, lieux de la Ville de Paris, page « À propos » (crédits, confidentialité, mentions légales), police et carte hébergées avec l'app
 >
 > **Plan de lancement** (gratuit puis rentable) : voir [LANCEMENT.md](LANCEMENT.md)
 
@@ -31,6 +31,14 @@ Une app web pensée pour le mobile. On choisit **quand**, **où** et **quoi** (c
 - on choisit **sa** date : un créneau pour une pièce qui joue plusieurs soirs, ou un jour pour une expo ;
 - **Google Agenda** ouvre l'événement prérempli. **Apple / Outlook** télécharge un fichier `.ics` (heure de Paris, rappel 2 h avant, lien billetterie dans la note) ;
 - la date choisie est **retenue** : la sortie se range à ce jour-là dans « Mes sorties », avec une seule pastille dans le calendrier et la mention « 📅 dans ton agenda ». Une sortie pas encore swipée passe automatiquement en « Oui ».
+
+**♿ Accessibilité** (section des filtres) : fauteuil roulant ♿, malvoyant·es 👁️, malentendant·es 🧏, langue des signes 🤟, handicap mental 🧠. Les pictos apparaissent aussi sur les cartes et les fiches.
+- L'info vient des organisateurs (champs `pmr`, `blind`, `deaf`, `sign_language`, `mental` de « Que faire à Paris »). Une sortie sans picto n'est pas forcément inaccessible : l'info n'a pas été donnée, et l'app le dit.
+- Plusieurs critères cochés = la sortie doit les remplir tous.
+
+**🏛️ Lieux de la Ville de Paris** (option des filtres, badge « Lieu municipal ») : bibliothèques, conservatoires, centres Paris Anim', parcs, musées de la Ville (Paris Musées) et établissements culturels municipaux (Centquatre, Gaîté Lyrique, Carreau du Temple, Théâtre de la Ville, Châtelet…). La liste se règle dans `LIEUX_VILLE` de `public/config.js`. Simple filtre, sans favoritisme dans l'ordre de la pile.
+
+**ℹ️ À propos** (`#/apropos`, lien dans les filtres et sur chaque fiche) : d'où viennent les données et sous quelle licence, crédits (photos, carte, police), ce que l'app fait de tes données (rien ne sort du téléphone), un bouton pour tout effacer, et les mentions légales.
 
 Chaque carte affiche l'image, la date, le lieu, l'arrondissement, les genres et un bouton **Billetterie**. Le bouton **Partager** crée un lien (WhatsApp, SMS ou copie) qui ouvre la fiche chez les potes avec « *Prénom* te propose cette sortie », et ils peuvent répondre Oui / Pourquoi pas / Non.
 
@@ -64,6 +72,13 @@ Le robot `.github/workflows/mise-a-jour.yml` tourne sur les serveurs de GitHub, 
 
 Les choix des utilisateur·rices (oui / pourquoi pas / non, agenda) restent stockés **dans leur navigateur**. Il n'y a pas encore de compte ni de base partagée.
 
+## Licences et vie privée
+
+- **Données** : « Que faire à Paris » est sous **licence ODbL**. L'usage, y compris commercial, est permis à deux conditions : citer la source (« Ville de Paris – Que faire à Paris », fait dans les filtres, sur chaque fiche et dans « À propos ») et publier la base dérivée sous la même licence (`data/events.json`, mentionné dans « À propos »).
+- **Aucun appel à Google ni à un CDN** : la police (Bricolage Grotesque, licence OFL, `public/fonts/`) et la carte (MapLibre GL 4.7.1, licence BSD, `public/vendor/maplibre-gl/`, vérifiée contre l'empreinte cdnjs) sont servies par l'app. Les seuls serveurs extérieurs contactés sont `cdn.paris.fr` (photos) et `tiles.openfreemap.org` (fond de carte, quand on ouvre la carte).
+- **Pas de cookie ni de mesure d'audience**, donc pas de bandeau de consentement. Si on ajoute des statistiques, choisir un outil sans cookie et mettre à jour « À propos ».
+- **Mentions légales** : éditeur particulier anonyme (permis par la LCEN), hébergeur GitHub. À revoir au passage en micro-entreprise : les mentions deviennent alors complètes (nom, adresse, SIRET).
+
 ## Comment c'est construit
 
 ```
@@ -78,7 +93,8 @@ Sources en ligne ──► ingest/ (Node, 1×/jour) ──► public/data/events
 | `ingest/sources/*.mjs` | Un fichier par source, qui la traduit dans le format commun. |
 | `ingest/run.mjs` | Fusionne les sources, calcule zones, tags et « nouveautés », écrit `events.json`. |
 | `ingest/first_seen.json` | Date de première apparition de chaque événement (sert au tag « Nouveauté »). |
-| `public/app.js` | L'app : filtres, pile de cartes, swipe, listes, fiche, partage. |
+| `public/app.js` | L'app : filtres, pile de cartes, swipe, listes, fiche, partage, carte, « À propos ». |
+| `public/fonts/`, `public/vendor/` | Police et bibliothèque de carte hébergées avec l'app, avec leurs licences. |
 
 Les choix (oui / pourquoi pas / non), les filtres et le prénom sont stockés **dans le navigateur** (pas de compte pour l'instant).
 

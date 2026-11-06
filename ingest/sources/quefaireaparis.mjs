@@ -12,7 +12,12 @@ const FIELDS = [
   'id', 'url', 'title', 'lead_text', 'description', 'date_start', 'date_end', 'occurrences',
   'cover_url', 'cover_credit', 'address_name', 'address_street', 'address_zipcode', 'address_city',
   'lat_lon', 'price_type', 'price_detail', 'access_type', 'access_link', 'qfap_tags', 'updated_at',
+  'pmr', 'blind', 'deaf', 'sign_language', 'mental', 'group',
 ];
+
+// Accessibilité : 1 = accessible, 0 ou vide = non précisé (ou non accessible).
+const ACCESS_FIELDS = { pmr: 'pmr', blind: 'blind', deaf: 'deaf', lsf: 'sign_language', mental: 'mental' };
+const a11yOf = (r) => Object.entries(ACCESS_FIELDS).filter(([, f]) => String(r[f]) === '1').map(([id]) => id);
 
 // Les sorties « pour enfants » sont écartées : l'app vise les sorties entre potes.
 const EXCLURE_JEUNE_PUBLIC = true;
@@ -102,6 +107,8 @@ export async function fetchEvents({ todayISO, untilISO }) {
       ticketUrl: /^https?:\/\//.test(r.access_link || '') ? r.access_link : null,
       infoUrl: r.url || null,
       updatedAt: r.updated_at || null,
+      a11y: a11yOf(r),
+      group: r.group || null,
     });
   }
   return events;

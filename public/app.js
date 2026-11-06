@@ -1,9 +1,14 @@
-import { APP_NAME, CATEGORIES, OPTIONS, BANLIEUE } from './config.js';
+import { APP_NAME, CATEGORIES, OPTIONS, BANLIEUE, ACCESS } from './config.js';
 
 // ════════════════════════════════════════════════════════════
 //  Outils
 // ════════════════════════════════════════════════════════════
 const CAT = Object.fromEntries(CATEGORIES.map((c) => [c.id, c]));
+const ACC = Object.fromEntries(ACCESS.map((a) => [a.id, a]));
+const VERSION = '1.4';
+const REPO = 'https://github.com/justinecullet-jpg/sortir';
+const QFAP_DATASET = 'https://opendata.paris.fr/explore/dataset/que-faire-a-paris-/information/';
+const ODBL = 'https://opendatacommons.org/licenses/odbl/';
 const TAG_LABEL = Object.fromEntries(CATEGORIES.flatMap((c) => c.tags.map((t) => [`${c.id}:${t.id}`, t.label])));
 const GRANDE_COURONNE = ['77', '78', '91', '95'];
 const DECISIONS = {
@@ -69,6 +74,7 @@ const defaultFilters = () => ({
   cats: Object.fromEntries(CATEGORIES.map((c) => [c.id, []])), // [] = tous les genres ; null = catégorie décochée
   places: { paris: 'all', banlieue: [] }, // paris : 'all' ou liste d'arrondissements
   options: [],
+  access: [], // critères d'accessibilité exigés (tous à la fois)
 });
 
 function loadState() {
@@ -151,6 +157,8 @@ function baseOk(ev, f, r) {
   if (f.options.includes('gratuit') && !ev.free) return false;
   if (f.options.includes('nouveaute') && !ev.isNew) return false;
   if (f.options.includes('billetterie') && !ev.ticketUrl) return false;
+  if (f.options.includes('municipal') && !ev.municipal) return false;
+  if (f.access?.length && !f.access.every((a) => ev.a11y?.includes(a))) return false;
   return !!slotIn(ev, r);
 }
 
@@ -183,7 +191,8 @@ function summary(f) {
   const what = cats.length === CATEGORIES.length && cats.every((c) => !f.cats[c.id].length)
     ? 'Tout'
     : cats.map((c) => c.label + (f.cats[c.id].length ? ` (${f.cats[c.id].length})` : '')).join(', ') || 'Rien';
-  return `${when} · ${where} · ${what}`;
+  const acc = (f.access || []).map((a) => ACC[a]?.emoji).join('');
+  return `${when} · ${where} · ${what}${acc ? ` · ${acc}` : ''}`;
 }
 
 // ════════════════════════════════════════════════════════════
@@ -208,7 +217,17 @@ function badges(ev) {
   return `<span class="badge cat" style="--c:${c.color}">${c.emoji} ${esc(c.label)}</span>`
     + (ev.isNew ? '<span class="badge new">Nouveau</span>' : '')
     + (ev.free ? '<span class="badge free">Gratuit</span>' : '')
-    + (isLastChance(ev) ? '<span class="badge last">Dernière chance</span>' : '');
+    + (isLastChance(ev) ? '<span class="badge last">Dernière chance</span>' : '')
+    + (ev.municipal ? '<span class="badge ville" title="Lieu de la Ville de Paris">🏛️ Lieu municipal</span>' : '')
+    + a11yBadge(ev);
+}
+
+// Pictos d'accessibilité (déclarée par l'organisateur), lisibles par les lecteurs d'écran.
+function a11yBadge(ev) {
+  const list = (ev.a11y || []).map((a) => ACC[a]).filter(Boolean);
+  if (!list.length) return '';
+  const label = list.map((a) => a.long).join(', ');
+  return `<span class="badge a11y" role="img" title="${esc(label)}" aria-label="${esc(label)}">${list.map((a) => a.emoji).join('')}</span>`;
 }
 
 function coverHTML(ev, cls = 'cover') {
@@ -379,8 +398,8 @@ function undo() {
 
 // Copie légère de l'événement : la liste reste lisible même s'il disparaît des sources.
 function snapshot(ev) {
-  const { id, cat, title, image, start, end, venue, area, address, ticketUrl, infoUrl, text, free, tags, isNew, lat, lon } = ev;
-  return { id, cat, title, image, start, end, slots: ev.slots ? ev.slots.slice(0, 20) : null, venue, area, address, ticketUrl, infoUrl, text, free, tags, isNew, lat, lon };
+  const { id, cat, title, image, start, end, venue, area, address, ticketUrl, infoUrl, text, free, tags, isNew, lat, lon, a11y, municipal, source, credit } = ev;
+  return { id, cat, title, image, start, end, slots: ev.slots ? ev.slots.slice(0, 20) : null, venue, area, address, ticketUrl, infoUrl, text, free, tags, isNew, lat, lon, a11y, municipal, source, credit };
 }
 
 // ════════════════════════════════════════════════════════════
@@ -392,6 +411,10 @@ function renderFilters() {
   const r = rangeFor(f);
   const base = S.events.filter((e) => !S.decisions[e.id] && baseOk(e, f, r));
   const total = base.filter((e) => catOk(e, f)).length;
+  // Compteurs d'accessibilité : calculés sans le filtre d'accessibilité lui-même.
+  const accessBase = f.access.length
+    ? S.events.filter((e) => !S.decisions[e.id] && catOk(e, f) && baseOk(e, { ...f, access: [] }, r))
+    : base.filter((e) => catOk(e, f));
   const arrs = Array.isArray(f.places.paris) ? f.places.paris : [];
   const scroll = $('.page')?.scrollTop || 0;
   const first = !S.onboarded;
@@ -402,6 +425,7 @@ function renderFilters() {
       <div class="hero">
         <h1>On sort où&nbsp;?</h1>
         <p>Choisis quand, où et ce qui te branche. Ensuite : swipe à droite si t'es chaud·e, à gauche si non, vers le haut pour « pourquoi pas ».</p>
+        <p class="hero-note">Gratuit, sans compte ni pub, tes choix restent sur ton téléphone. <button class="link-btn" data-go="#/apropos">En savoir plus</button></p>
       </div>` : `
       <div class="page-head">
         <button class="icon-btn" data-cancel aria-label="Fermer">✕</button>
@@ -468,12 +492,24 @@ function renderFilters() {
       </div>
     </section>
 
+    <section class="section">
+      <h2>Accessibilité</h2>
+      <div class="chips">
+        ${ACCESS.map((a) => {
+          const k = accessBase.filter((e) => e.a11y?.includes(a.id)).length;
+          return `<button class="chip sm" data-access="${a.id}" aria-pressed="${f.access.includes(a.id)}" aria-label="${esc(a.long)}" ${k ? '' : 'data-zero'}>${a.emoji} ${esc(a.label)} <span class="n">${k}</span></button>`;
+        }).join('')}
+      </div>
+      <p class="sub">D'après les organisateurs. Une sortie sans picto n'est pas forcément inaccessible : l'info n'a juste pas été donnée, renseigne-toi auprès du lieu.</p>
+    </section>
+
     <div class="sticky-foot">
       <button class="btn primary block" data-apply ${total ? '' : 'disabled'}>${total ? `Swiper ${total} sortie${total > 1 ? 's' : ''}` : 'Aucune sortie avec ces filtres'}</button>
     </div>
     <div class="foot-note">
-      Sources : ${(S.meta?.sources || []).map((s) => `<a href="${esc(safeUrl(s.url) || '#')}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(', ')}
-      · mises à jour le ${S.meta ? `${fmtDate(S.meta.generatedAt)} à ${fmtTime(S.meta.generatedAt) || '0h'}` : '—'}.<br>
+      Données : ${(S.meta?.sources || []).map((s) => `<a href="${esc(safeUrl(s.url) || '#')}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(', ')}
+      (Ville de Paris, licence ODbL) · mises à jour le ${S.meta ? `${fmtDate(S.meta.generatedAt)} à ${fmtTime(S.meta.generatedAt) || '0h'}` : '—'}.<br>
+      <button class="link-btn" data-go="#/apropos">À propos · crédits · confidentialité</button><br>
       ${Object.values(S.decisions).some((d) => d.d === 'non') ? '<button class="link-btn" data-reset-non>Revoir les sorties que j\'ai passées (Non)</button>' : ''}
     </div>
   </div>`;
@@ -503,6 +539,9 @@ function onFilterClick(t) {
   } else if (t.dataset.option) {
     const o = t.dataset.option;
     f.options = f.options.includes(o) ? f.options.filter((x) => x !== o) : [...f.options, o];
+  } else if (t.dataset.access) {
+    const a = t.dataset.access;
+    f.access = f.access.includes(a) ? f.access.filter((x) => x !== a) : [...f.access, a];
   } else if ('resetFilters' in t.dataset) {
     S.draft = defaultFilters();
   } else if ('resetNon' in t.dataset) {
@@ -730,6 +769,9 @@ function renderDetail(id, params) {
       ${upcoming && upcoming.length > 1 ? `<div class="slots">${upcoming.slice(0, 8).map((s) => `<span class="tag">${fmtDay(s[0])}${fmtTime(s[0]) ? ` ${fmtTime(s[0])}` : ''}</span>`).join('')}${upcoming.length > 8 ? `<span class="tag">+${upcoming.length - 8}</span>` : ''}</div>` : ''}
       <div class="line"><span class="ico">📍</span><span>${esc(ev.venue || 'Lieu à préciser')}${ev.address ? `<br><span style="color:var(--muted)">${esc(ev.address)}</span>` : ''}</span></div>
       ${tags.length ? `<div class="tagline" style="margin-left:26px">${tags.map((t) => `<span class="tag">#${esc(t)}</span>`).join('')}</div>` : ''}
+      ${ev.municipal ? '<div class="line"><span class="ico">🏛️</span><span>Lieu de la Ville de Paris</span></div>' : ''}
+      ${ev.a11y?.length ? `${ev.a11y.map((a) => ACC[a]).filter(Boolean).map((a) => `<div class="line"><span class="ico" aria-hidden="true">${a.emoji}</span><span>${esc(a.long)}</span></div>`).join('')}
+        <div class="line"><span class="ico"></span><small class="muted">Accessibilité déclarée par l'organisateur</small></div>` : ''}
       <div class="cta">
         ${ticket ? `<a class="btn primary" href="${esc(ticket)}" target="_blank" rel="noopener">🎟️ Billetterie</a>` : ''}
         <button class="btn" data-share="${esc(ev.id)}">↗ Partager à mes potes</button>
@@ -737,7 +779,8 @@ function renderDetail(id, params) {
         ${maps ? `<a class="btn" href="${esc(maps)}" target="_blank" rel="noopener">🧭 Y aller</a>` : ''}
       </div>
       ${ev.text ? `<p class="desc">${esc(ev.text)}${ev.more ? `<br><br>${esc(ev.more)}` : ''}</p>` : ''}
-      ${info ? `<p class="source">Source : <a href="${esc(info)}" target="_blank" rel="noopener">${esc(ev.source || 'fiche officielle')}</a></p>` : ''}
+      <p class="source">Source : ${info ? `<a href="${esc(info)}" target="_blank" rel="noopener">${esc(ev.source || 'fiche officielle')}</a>` : esc(ev.source || '—')}${ev.source === 'Que faire à Paris' ? ' · Ville de Paris, licence ODbL' : ''}
+        · <button class="link-btn" data-go="#/apropos">crédits</button></p>
     </div>
     <div class="decide-bar" style="--c:${c.color}">
       <button class="non" data-detail-decide="non" aria-pressed="${dec === 'non'}">✕ Non</button>
@@ -748,12 +791,80 @@ function renderDetail(id, params) {
 }
 
 // ════════════════════════════════════════════════════════════
+//  Vue : à propos (crédits, confidentialité, mentions légales)
+// ════════════════════════════════════════════════════════════
+function renderAbout() {
+  const ext = (href, label) => `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  const updated = S.meta ? `${fmtDate(S.meta.generatedAt)} à ${fmtTime(S.meta.generatedAt) || '0h'}` : '—';
+  app.innerHTML = `
+  <div class="page about">
+    <div class="page-head">
+      <button class="icon-btn" data-back aria-label="Retour">←</button>
+      <h1>À propos</h1>
+    </div>
+
+    <section class="section">
+      <h2>${esc(APP_NAME)}, c'est quoi ?</h2>
+      <p>Une app gratuite pour trouver une sortie à Paris en quelques gestes : concerts, cinéma, expos, spectacles. Tu choisis quand, où et ce qui te branche, tu swipes, et tu partages à tes potes.</p>
+      <p>C'est un projet personnel et non commercial : pas de compte, pas de pub, pas de pistage.</p>
+    </section>
+
+    <section class="section">
+      <h2>D'où viennent les sorties</h2>
+      <p>Toutes les sorties viennent de ${ext(QFAP_DATASET, '« Que faire à Paris »')}, l'agenda participatif de la <b>Ville de Paris</b> (Direction de la Communication), publié en open data sous ${ext(ODBL, 'licence ODbL')}. Elles sont importées automatiquement deux fois par jour. Dernière mise à jour : ${updated}.</p>
+      <p>${esc(APP_NAME)} réorganise ces données (catégories, genres, quartiers, lieux de la Ville). La base qui en résulte est publiée sous la même licence ODbL : ${ext('data/events.json', 'data/events.json')}.</p>
+      <p>Les infos d'accessibilité et les tarifs sont ceux déclarés par les organisateurs : en cas de doute, vérifie auprès du lieu.</p>
+    </section>
+
+    <section class="section">
+      <h2>Crédits</h2>
+      <ul class="about-list">
+        <li><b>Photos</b> : © leurs auteurs et les organisateurs, crédit indiqué sur chaque fiche quand il est connu.</li>
+        <li><b>Carte</b> : fond ${ext('https://openfreemap.org', 'OpenFreeMap')}, © ${ext('https://openmaptiles.org', 'OpenMapTiles')}, données © ${ext('https://www.openstreetmap.org/copyright', 'contributeurs OpenStreetMap')}. Affichage avec ${ext('https://maplibre.org', 'MapLibre GL JS')} (licence BSD).</li>
+        <li><b>Police</b> : Bricolage Grotesque (${ext('fonts/OFL.txt', 'SIL Open Font License')}).</li>
+        <li><b>Code</b> : ${ext(REPO, 'ouvert sur GitHub')}.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Tes données</h2>
+      <ul class="about-list">
+        <li><b>Rien n'est collecté.</b> Pas de compte, pas de cookie, pas de mesure d'audience.</li>
+        <li>Tes choix (oui, non, pourquoi pas), tes filtres et le prénom que tu donnes pour partager restent <b>dans ce navigateur, sur cet appareil</b>. Personne d'autre n'y a accès.</li>
+        <li>Pour fonctionner, l'app se connecte à son hébergeur (GitHub Pages, qui note l'adresse IP dans ses journaux techniques, comme tout site), aux serveurs de la Ville de Paris pour les photos, et à OpenFreeMap pour le fond de carte quand tu ouvres la carte.</li>
+        <li>Ta position n'est utilisée que si tu appuies sur ◎ dans la carte et que tu l'acceptes. Elle reste sur ton téléphone.</li>
+        <li>Les boutons Billetterie, Google Agenda, WhatsApp ou Y aller t'emmènent vers d'autres services, seulement quand tu appuies dessus. Leurs propres règles s'appliquent alors.</li>
+      </ul>
+      <button class="btn small" data-wipe>🗑️ Effacer mes choix sur cet appareil</button>
+    </section>
+
+    <section class="section">
+      <h2>Mentions légales</h2>
+      <p>${esc(APP_NAME)} est édité à titre non professionnel par un particulier qui, comme le permet la loi pour la confiance dans l'économie numérique (LCEN), a choisi de rester anonyme. Ses coordonnées ont été communiquées à l'hébergeur.</p>
+      <p><b>Hébergeur</b> : GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+      <p><b>Une erreur, une photo à retirer ?</b> ${ext(`${REPO}/issues`, 'Écris via la page du projet sur GitHub')}.</p>
+    </section>
+
+    <div class="foot-note">${esc(APP_NAME)} v${VERSION}</div>
+  </div>`;
+}
+
+function wipeData() {
+  if (!window.confirm('Effacer tes oui, non, pourquoi pas, tes filtres et ton prénom sur cet appareil ?')) return;
+  try { localStorage.removeItem(STORE_KEY); } catch { /* stockage indisponible */ }
+  Object.assign(S, { filters: defaultFilters(), decisions: {}, name: '', onboarded: false, deckBuiltFor: null, listDay: null });
+  toast('C\'est effacé');
+  go('#/', { replace: true });
+}
+
+// ════════════════════════════════════════════════════════════
 //  Vue : carte
 //  Fond de carte OpenFreeMap (gratuit, sans clé, usage commercial permis)
 //  affiché avec MapLibre, chargé seulement quand on ouvre la carte.
 // ════════════════════════════════════════════════════════════
-const MAPLIBRE_JS = 'https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js';
-const MAPLIBRE_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css';
+// Hébergée avec l'app (version 4.7.1, licence BSD) : aucun appel à un CDN tiers.
+const MAPLIBRE_JS = 'vendor/maplibre-gl/maplibre-gl.js';
+const MAPLIBRE_CSS = 'vendor/maplibre-gl/maplibre-gl.css';
 const MAP_STYLE = 'https://tiles.openfreemap.org/styles/dark';
 const PARIS = { center: [2.3488, 48.8566], zoom: 11.3 };
 
@@ -1247,6 +1358,7 @@ function route() {
 
   if (parts[0] === 'e' && parts[1]) return renderDetail(decodeURIComponent(parts[1]), params);
   if (parts[0] && parts[0] !== 'carte' && S.map) { S.map.remove(); S.map = null; }
+  if (parts[0] === 'apropos') return renderAbout();
   if (parts[0] === 'carte' && S.onboarded) return renderMap();
   if (parts[0] === 'liste') return renderList(['oui', 'peutetre'].includes(parts[1]) ? parts[1] : 'tout');
   if (parts[0] === 'filtres' || !S.onboarded) return renderFilters();
@@ -1304,6 +1416,7 @@ app.addEventListener('click', (e) => {
     return;
   }
   if ('calClear' in t.dataset) { S.listDay = null; rerender(); return; }
+  if ('wipe' in t.dataset) { wipeData(); return; }
   if (location.hash.startsWith('#/filtres') || !S.onboarded) onFilterClick(t);
 });
 

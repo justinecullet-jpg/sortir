@@ -74,7 +74,34 @@ export const OPTIONS = [
   { id: 'nouveaute', label: '🆕 Nouveautés' },
   { id: 'gratuit', label: '🆓 Gratuit' },
   { id: 'billetterie', label: '🎟️ Avec billetterie en ligne' },
+  { id: 'municipal', label: '🏛️ Lieux de la Ville de Paris' },
 ];
+
+// Accessibilité, telle que déclarée par les organisateurs dans « Que faire à Paris ».
+// Une sortie non marquée n'est pas forcément inaccessible : l'info n'est simplement pas donnée.
+export const ACCESS = [
+  { id: 'pmr', emoji: '♿', label: 'Fauteuil roulant', long: 'Accessible en fauteuil roulant' },
+  { id: 'blind', emoji: '👁️', label: 'Malvoyant·es', long: 'Adapté aux personnes aveugles ou malvoyantes' },
+  { id: 'deaf', emoji: '🧏', label: 'Malentendant·es', long: 'Adapté aux personnes sourdes ou malentendantes' },
+  { id: 'lsf', emoji: '🤟', label: 'Langue des signes', long: 'En langue des signes française (LSF)' },
+  { id: 'mental', emoji: '🧠', label: 'Handicap mental', long: 'Adapté aux personnes avec un handicap mental' },
+];
+
+// Lieux de la Ville de Paris : réseaux municipaux (champ « group » de la source)
+// et établissements culturels de la Ville reconnus à leur nom (dans Paris seulement).
+export const LIEUX_VILLE = {
+  groupes: ['Bibliothèques', 'Conservatoires', "Centres d'animations", 'Parcs et jardins', 'Musées', 'Fabrique de la solidarité'],
+  re: [
+    // Paris Musées
+    'petit palais', "mus[ée]e d'art moderne de paris", 'carnavalet', 'cernuschi', 'cognacq-jay', 'bourdelle', 'zadkine',
+    'palais galliera', 'maison de victor hugo', 'maison de balzac', 'vie romantique', 'lib[ée]ration de paris', 'catacombes',
+    'crypte arch[ée]ologique',
+    // Établissements culturels de la Ville
+    'centquatre', 'ga[iî]t[ée] lyrique', 'carreau du temple', 'th[ée][âa]tre de la ville', 'th[ée][âa]tre du ch[âa]telet',
+    'maison des m[ée]tallos', "pavillon de l'arsenal", 'forum des images', 'th[ée][âa]tre de la concorde', 'plateaux sauvages',
+    'pratiques artistiques amateurs', '\\bmpaa\\b', 'paris anim',
+  ].join('|'),
+};
 
 // Un événement est une « nouveauté » s'il est apparu dans les sources
 // depuis moins de N jours, ou si son texte contient ces mots-clés.

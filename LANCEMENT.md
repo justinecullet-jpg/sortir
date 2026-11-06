@@ -25,11 +25,11 @@
 - **Retours** : un bouton « Donner mon avis » qui ouvre un formulaire (Tally ou Google Forms, gratuits).
 - **Contenu** : brancher **OpenAgenda** (banlieue) et **Ticketmaster** (concerts), avec une clé gratuite chacun que tu crées, et trouver une piste techno.
 - **Mesurer sans cookies** : Cloudflare Web Analytics ou GoatCounter, gratuits. Sans cookie, pas besoin de bandeau de consentement.
-- **Propreté RGPD** : héberger la police de caractères avec l'app au lieu de la charger chez Google Fonts. Ça évite d'envoyer l'adresse IP des visiteurs à Google. C'est 10 minutes de travail.
-- **Pages légales** (une seule page « À propos ») :
-  - *mentions légales* : en tant que particulier, tu peux ne publier que les coordonnées de l'hébergeur, s'il a ton identité ;
-  - *confidentialité* : aujourd'hui, aucune donnée ne quitte le téléphone de l'utilisateur ;
-  - *crédits* : sources des données (« Que faire à Paris », Ville de Paris), fond de carte (OpenFreeMap / OpenStreetMap) et photos (crédits des organisateurs).
+- ☑ **Propreté RGPD** (fait le 06/11, v1.4) : la police et la bibliothèque de carte sont hébergées avec l'app. Plus aucun appel à Google Fonts ni à un CDN.
+- ☑ **Page « À propos »** (fait le 06/11, v1.4) : mentions légales (particulier anonyme + hébergeur), confidentialité (rien ne quitte le téléphone, bouton pour tout effacer), crédits (données ODbL de la Ville, carte, photos, police).
+- ☑ **Accessibilité et lieux de la Ville** (fait le 06/11, v1.4) : filtre et pictos d'accessibilité, option « Lieux de la Ville de Paris ». Ce sont de bons arguments pour la Ville (voir étape 2).
+
+**Se faire connaître de la Ville de Paris** (au lancement public, étape 2) : déclarer l'app comme « réutilisation » sur la page du jeu de données « Que faire à Paris » (formulaire : nom et prénom publics, e-mail privé, titre ≤ 50 caractères, description ≤ 1 000 caractères, adresse, image), puis écrire à l'équipe de « Que faire à Paris ». Aucune réutilisation n'y était déclarée au 06/11/2026.
 
 **Indicateurs à suivre chaque semaine**
 
@@ -61,7 +61,8 @@ C'est **le moment des choix définitifs**, parce que les liens partagés contien
 - [ ] Créer une **micro-entreprise** : gratuit, sur formalites.entreprises.gouv.fr. Le plafond de chiffre d'affaires pour les services est de l'ordre de 77 000 €/an (à vérifier).
 - [ ] Ouvrir un compte bancaire dédié.
 - [ ] Déposer la **marque** à l'INPI : environ 190 € pour une classe, +40 € par classe en plus. Classes utiles : 9 (application), 35 (publicité), 41 (activités culturelles).
-- [ ] **Droits** : les photos appartiennent aux organisateurs. En mode commercial, n'utilise que celles des partenaires qui t'envoient leurs visuels, et vérifie la licence des données « Que faire à Paris » pour un usage commercial.
+- [ ] **Droits** : les photos appartiennent aux organisateurs. En mode commercial, n'utilise que celles des partenaires qui t'envoient leurs visuels. Les données « Que faire à Paris » sont sous licence ODbL : l'usage commercial est permis, en citant la source et en gardant la base dérivée sous ODbL (déjà fait dans « À propos »).
+- [ ] **Mentions légales complètes** : une fois la micro-entreprise créée, l'éditeur n'est plus anonyme. Nom, adresse et SIRET dans « À propos ».
 
 **Les revenus, dans l'ordre**
 1. **Affiliation billetterie** : le bouton Billetterie passe par un lien affilié et te rapporte une commission par billet vendu. C'est simple à brancher : il suffit de s'inscrire aux programmes d'affiliation des billetteries qui en ont un.

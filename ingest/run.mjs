@@ -8,7 +8,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { CATEGORIES, NOUVEAUTE_JOURS, NOUVEAUTE_RE, FENETRE_JOURS } from '../public/config.js';
+import { CATEGORIES, NOUVEAUTE_JOURS, NOUVEAUTE_RE, FENETRE_JOURS, LIEUX_VILLE } from '../public/config.js';
 import * as queFaireAParis from './sources/quefaireaparis.mjs';
 
 // Ajouter ici les prochaines sources (OpenAgenda, Ticketmaster…), par ordre de priorité :
@@ -55,6 +55,10 @@ const TAG_RULES = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.tags.map((t)
   id: t.id, src: t.src || [], rx: t.re ? new RegExp(t.re, 'i') : null,
 }))]));
 const NOUVEAUTE_RX = new RegExp(NOUVEAUTE_RE, 'i');
+const LIEUX_VILLE_RX = new RegExp(LIEUX_VILLE.re, 'i');
+// Lieu de la Ville de Paris : réseau municipal déclaré par la source, ou établissement reconnu à son nom.
+const isMunicipal = (ev, where) => where.zone === 'paris'
+  && (LIEUX_VILLE.groupes.includes(ev.group) || LIEUX_VILLE_RX.test(`${ev.venue || ''} ${ev.address || ''}`));
 
 const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 
@@ -103,8 +107,13 @@ async function main() {
         .map((t) => t.id);
       const isNew = firstSeen[ev.id] >= newSince || NOUVEAUTE_RX.test(ev.searchText);
 
-      const { srcTags, searchText, updatedAt, zip, city, ...rest } = ev;
-      events.push({ ...rest, ...where, tags, isNew });
+      const { srcTags, searchText, updatedAt, zip, city, group, a11y, ...rest } = ev;
+      events.push({
+        ...rest, ...where, tags, isNew,
+        // Champs facultatifs : absents quand vides, pour garder le fichier léger.
+        ...(a11y?.length ? { a11y } : {}),
+        ...(isMunicipal(ev, where) ? { municipal: true } : {}),
+      });
       kept++;
     }
     sourcesMeta.push({ name: src.name, url: src.homepage, count: kept });
@@ -137,7 +146,10 @@ async function main() {
     const byTag = c.tags.map((t) => `${t.id} ${inCat.filter((e) => e.tags.includes(t.id)).length}`).join(' · ');
     console.log(`  ${c.emoji} ${c.label.padEnd(8)} ${String(inCat.length).padStart(4)}  (${byTag})`);
   }
-  console.log(`  🆕 nouveautés ${events.filter((e) => e.isNew).length} · banlieue ${events.filter((e) => e.zone === 'banlieue').length}`);
+  console.log(`  🆕 nouveautés ${events.filter((e) => e.isNew).length} · banlieue ${events.filter((e) => e.zone === 'banlieue').length}`
+    + ` · 🏛️ lieux de la Ville ${events.filter((e) => e.municipal).length}`);
+  const a11yCount = (id) => events.filter((e) => e.a11y?.includes(id)).length;
+  console.log(`  ♿ ${a11yCount('pmr')} · 👁️ ${a11yCount('blind')} · 🧏 ${a11yCount('deaf')} · 🤟 ${a11yCount('lsf')} · 🧠 ${a11yCount('mental')}`);
   console.log(`→ ${events.length} événements écrits dans public/data/events.json`);
 }
 
