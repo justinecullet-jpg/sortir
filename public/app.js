@@ -5,7 +5,7 @@ import { APP_NAME, CATEGORIES, OPTIONS, BANLIEUE, ACCESS } from './config.js';
 // ════════════════════════════════════════════════════════════
 const CAT = Object.fromEntries(CATEGORIES.map((c) => [c.id, c]));
 const ACC = Object.fromEntries(ACCESS.map((a) => [a.id, a]));
-const VERSION = '1.4';
+const VERSION = '1.4.1';
 const REPO = 'https://github.com/justinecullet-jpg/sortir';
 const QFAP_DATASET = 'https://opendata.paris.fr/explore/dataset/que-faire-a-paris-/information/';
 const ODBL = 'https://opendatacommons.org/licenses/odbl/';

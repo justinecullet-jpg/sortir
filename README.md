@@ -1,6 +1,6 @@
 # Sortir : swipe tes sorties à Paris (prototype v1.4, 06/11/2026)
 
-> **Journal** · v1 : swipe, filtres, liste, partage · v1.1 : calendrier dans « Mes sorties » · v1.2 : « Ajouter à mon agenda » · v1.3 : vue Carte, affichage tablette et ordinateur, robot de mise en ligne · v1.4 : filtre accessibilité, lieux de la Ville de Paris, page « À propos » (crédits, confidentialité, mentions légales), police et carte hébergées avec l'app
+> **Journal** · v1 : swipe, filtres, liste, partage · v1.1 : calendrier dans « Mes sorties » · v1.2 : « Ajouter à mon agenda » · v1.3 : vue Carte, affichage tablette et ordinateur, robot de mise en ligne · v1.4 : filtre accessibilité, lieux de la Ville de Paris, page « À propos » (crédits, confidentialité, mentions légales), police et carte hébergées avec l'app · v1.4.1 : barre du haut décalée sous l’heure et la batterie de l’iPhone (app installée)
 >
 > **Plan de lancement** (gratuit puis rentable) : voir [LANCEMENT.md](LANCEMENT.md)
 
