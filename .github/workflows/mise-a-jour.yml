@@ -24,9 +24,9 @@ jobs:
   import:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
@@ -43,9 +43,9 @@ jobs:
             git push
           fi
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
@@ -54,7 +54,18 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deploiement.outputs.page_url }}
+      url: ${{ steps.essai1.outputs.page_url || steps.essai2.outputs.page_url }}
     steps:
-      - id: deploiement
-        uses: actions/deploy-pages@v4
+      # Une publication prend ~20 s. Il arrive que GitHub Pages cale (06/11/2026) :
+      # on abandonne au bout de 5 min et on retente une fois, avant de déclarer l'échec.
+      - name: Publier
+        id: essai1
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+        with:
+          timeout: 300000
+
+      - name: Publier (2e essai si GitHub Pages a calé)
+        id: essai2
+        if: steps.essai1.outcome == 'failure'
+        uses: actions/deploy-pages@v5

@@ -58,6 +58,8 @@ Le robot `.github/workflows/mise-a-jour.yml` tourne sur les serveurs de GitHub, 
 
 **Garde-fou** : si une source est en panne, ou si le nombre de sorties chute de plus de moitié, rien n'est publié. La version de la veille reste en ligne et GitHub t'envoie un e-mail d'échec.
 
+**Si GitHub Pages cale** (c'est arrivé le 06/11/2026 : publication restée « en cours » 10 min, sans erreur de notre côté) : le robot abandonne au bout de 5 min et retente une fois. Si le 2e essai échoue aussi, la version précédente reste en ligne et le passage suivant (12 h plus tard) republie tout.
+
 `public/data/events.json` n'est pas versionné (voir `.gitignore`) : le robot le refabrique à chaque fois, ce qui garde le dépôt léger.
 
 Les choix des utilisateur·rices (oui / pourquoi pas / non, agenda) restent stockés **dans leur navigateur**. Il n'y a pas encore de compte ni de base partagée.
@@ -109,7 +111,7 @@ Pour ajouter une source : copier `ingest/sources/quefaireaparis.mjs`, adapter `f
 - L'aperçu d'un lien partagé (WhatsApp, iMessage) est générique : un aperçu par événement demande un petit serveur.
 
 ## Suite proposée
-1. **Mise en ligne** : prête (voir plus haut), il ne manque que le compte GitHub.
+1. **Mise en ligne** : faite le 06/11/2026 (voir plus haut).
 2. **Sources** : OpenAgenda (banlieue), Ticketmaster (concerts), TMDB (films à l'affiche), puis une piste techno.
 3. **Social** : voir ce que les potes ont swipé sur un même événement (« 3 potes ont dit oui »), ce qui demande des comptes et une petite base de données.
 4. **App native** si besoin (Capacitor ou React Native à partir de la même logique).
