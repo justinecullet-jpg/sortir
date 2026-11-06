@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <rect width="1080" height="1080" fill="#1d1d24"/>
+  <text x="540" y="56" text-anchor="middle" font-family="Helvetica, Arial" font-size="24" fill="#9b9baa">Grand format · et à droite, la taille réelle sur l'écran d'accueil</text>
+  
+  <svg x="60" y="110" width="300" height="300" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(-14 256 256)">
+    <path d="M84 150 H310 A24 24 0 0 0 358 150 H428 A28 28 0 0 1 456 178 V334 A28 28 0 0 1 428 362 H358 A24 24 0 0 0 310 362 H84 A28 28 0 0 1 56 334 V178 A28 28 0 0 1 84 150 Z" fill="#ffc23d"/>
+    <line x1="334" y1="186" x2="334" y2="326" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M195 194 C202.44 237.4 213.6 248.56 257 256 C213.6 263.44 202.44 274.6 195 318 C187.56 274.6 176.4 263.44 133 256 C176.4 248.56 187.56 237.4 195 194 Z" fill="#0e0e12"/>
+    <path d="M395 236 C397.4 250 401 253.6 415 256 C401 258.4 397.4 262 395 276 C392.6 262 389 258.4 375 256 C389 253.6 392.6 250 395 236 Z" fill="#0e0e12"/>
+  </g>
+</svg>
+  <svg x="390" y="228" width="64" height="64" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(-14 256 256)">
+    <path d="M84 150 H310 A24 24 0 0 0 358 150 H428 A28 28 0 0 1 456 178 V334 A28 28 0 0 1 428 362 H358 A24 24 0 0 0 310 362 H84 A28 28 0 0 1 56 334 V178 A28 28 0 0 1 84 150 Z" fill="#ffc23d"/>
+    <line x1="334" y1="186" x2="334" y2="326" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M195 194 C202.44 237.4 213.6 248.56 257 256 C213.6 263.44 202.44 274.6 195 318 C187.56 274.6 176.4 263.44 133 256 C176.4 248.56 187.56 237.4 195 194 Z" fill="#0e0e12"/>
+    <path d="M395 236 C397.4 250 401 253.6 415 256 C401 258.4 397.4 262 395 276 C392.6 262 389 258.4 375 256 C389 253.6 392.6 250 395 236 Z" fill="#0e0e12"/>
+  </g>
+</svg>
+  <text x="210" y="450" text-anchor="middle" font-family="Helvetica, Arial" font-size="26" font-weight="700" fill="#f4f4f6">A · Billet (actuel)</text>
+  <svg x="580" y="110" width="300" height="300" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <path d="M256 458 C222 400 124 330 124 222 A132 132 0 1 1 388 222 C388 330 290 400 256 458 Z" fill="#ff4d8d"/>
+  <g transform="rotate(-10 256 222)">
+    <path d="M182 172 H280 A16 16 0 0 0 312 172 H330 A16 16 0 0 1 346 188 V256 A16 16 0 0 1 330 272 H312 A16 16 0 0 0 280 272 H182 A16 16 0 0 1 166 256 V188 A16 16 0 0 1 182 172 Z" fill="#ffffff"/>
+    <line x1="296" y1="196" x2="296" y2="248" stroke="#ff4d8d" stroke-width="8" stroke-dasharray="1 15" stroke-linecap="round"/>
+    <path d="M228 192 C231.6 213 237 218.4 258 222 C237 225.6 231.6 231 228 252 C224.4 231 219 225.6 198 222 C219 218.4 224.4 213 228 192 Z" fill="#ff4d8d"/>
+  </g>
+</svg>
+  <svg x="910" y="228" width="64" height="64" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <path d="M256 458 C222 400 124 330 124 222 A132 132 0 1 1 388 222 C388 330 290 400 256 458 Z" fill="#ff4d8d"/>
+  <g transform="rotate(-10 256 222)">
+    <path d="M182 172 H280 A16 16 0 0 0 312 172 H330 A16 16 0 0 1 346 188 V256 A16 16 0 0 1 330 272 H312 A16 16 0 0 0 280 272 H182 A16 16 0 0 1 166 256 V188 A16 16 0 0 1 182 172 Z" fill="#ffffff"/>
+    <line x1="296" y1="196" x2="296" y2="248" stroke="#ff4d8d" stroke-width="8" stroke-dasharray="1 15" stroke-linecap="round"/>
+    <path d="M228 192 C231.6 213 237 218.4 258 222 C237 225.6 231.6 231 228 252 C224.4 231 219 225.6 198 222 C219 218.4 224.4 213 228 192 Z" fill="#ff4d8d"/>
+  </g>
+</svg>
+  <text x="730" y="450" text-anchor="middle" font-family="Helvetica, Arial" font-size="26" font-weight="700" fill="#f4f4f6">D · Pin-billet</text>
+  
+  <svg x="60" y="590" width="300" height="300" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(-8 256 256)">
+    <path d="M100 150 H330 A22 22 0 0 0 374 150 H412 A30 30 0 0 1 442 180 V332 A30 30 0 0 1 412 362 H374 A22 22 0 0 0 330 362 H100 A30 30 0 0 1 70 332 V180 A30 30 0 0 1 100 150 Z" fill="#ffc23d"/>
+    <line x1="352" y1="186" x2="352" y2="326" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M268 200 C250 178 176 176 172 220 C168 262 268 250 268 296 C268 340 186 344 160 312" fill="none" stroke="#0e0e12" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
+  <svg x="390" y="708" width="64" height="64" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(-8 256 256)">
+    <path d="M100 150 H330 A22 22 0 0 0 374 150 H412 A30 30 0 0 1 442 180 V332 A30 30 0 0 1 412 362 H374 A22 22 0 0 0 330 362 H100 A30 30 0 0 1 70 332 V180 A30 30 0 0 1 100 150 Z" fill="#ffc23d"/>
+    <line x1="352" y1="186" x2="352" y2="326" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M268 200 C250 178 176 176 172 220 C168 262 268 250 268 296 C268 340 186 344 160 312" fill="none" stroke="#0e0e12" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
+  <text x="210" y="930" text-anchor="middle" font-family="Helvetica, Arial" font-size="26" font-weight="700" fill="#f4f4f6">E · Monogramme S</text>
+  <svg x="580" y="590" width="300" height="300" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <path d="M96 140 H238 C220 232 176 300 150 330 C172 360 182 400 178 430 H96 Z" fill="#ff4d8d"/>
+  <path d="M416 140 H274 C292 232 336 300 362 330 C340 360 330 400 334 430 H416 Z" fill="#ff4d8d"/>
+  <path d="M86 98 H426 V150 Q397.66666666666663 184 369.3333333333333 150 Q341 184 312.66666666666663 150 Q284.33333333333337 184 256 150 Q227.66666666666669 184 199.33333333333334 150 Q171 184 142.66666666666669 150 Q114.33333333333336 184 86.00000000000003 150 Z" fill="#c92e66"/>
+  <path d="M256 264 C262.48 301.8 272.2 311.52 310 318 C272.2 324.48 262.48 334.2 256 372 C249.52 334.2 239.8 324.48 202 318 C239.8 311.52 249.52 301.8 256 264 Z" fill="#ffc23d"/>
+  <rect x="170" y="430" width="172" height="14" rx="7" fill="#ffc23d" opacity=".35"/>
+</svg>
+  <svg x="910" y="708" width="64" height="64" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <path d="M96 140 H238 C220 232 176 300 150 330 C172 360 182 400 178 430 H96 Z" fill="#ff4d8d"/>
+  <path d="M416 140 H274 C292 232 336 300 362 330 C340 360 330 400 334 430 H416 Z" fill="#ff4d8d"/>
+  <path d="M86 98 H426 V150 Q397.66666666666663 184 369.3333333333333 150 Q341 184 312.66666666666663 150 Q284.33333333333337 184 256 150 Q227.66666666666669 184 199.33333333333334 150 Q171 184 142.66666666666669 150 Q114.33333333333336 184 86.00000000000003 150 Z" fill="#c92e66"/>
+  <path d="M256 264 C262.48 301.8 272.2 311.52 310 318 C272.2 324.48 262.48 334.2 256 372 C249.52 334.2 239.8 324.48 202 318 C239.8 311.52 249.52 301.8 256 264 Z" fill="#ffc23d"/>
+  <rect x="170" y="430" width="172" height="14" rx="7" fill="#ffc23d" opacity=".35"/>
+</svg>
+  <text x="730" y="930" text-anchor="middle" font-family="Helvetica, Arial" font-size="26" font-weight="700" fill="#f4f4f6">F · Rideau de scène</text>
+</svg>

@@ -1,0 +1,7 @@
+# Données générées par l'import (le robot les refabrique à chaque mise en ligne)
+public/data/events.json
+
+# Réglages locaux
+.claude/
+.DS_Store
+node_modules/

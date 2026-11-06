@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 -270 1080 1080">
+  <rect y="-270" width="1080" height="1080" fill="#1d1d24"/>
+  <text x="540" y="38" text-anchor="middle" font-family="Helvetica, Arial" font-size="22" fill="#9b9baa">Taille réelle sur l'écran d'accueil ↓</text>
+  
+  <svg x="40" y="60" width="300" height="300" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(-14 256 256)">
+    <path d="M84 150 H310 A24 24 0 0 0 358 150 H428 A28 28 0 0 1 456 178 V334 A28 28 0 0 1 428 362 H358 A24 24 0 0 0 310 362 H84 A28 28 0 0 1 56 334 V178 A28 28 0 0 1 84 150 Z" fill="#ffc23d"/>
+    <line x1="334" y1="186" x2="334" y2="326" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M195 194 C202.44 237.4 213.6 248.56 257 256 C213.6 263.44 202.44 274.6 195 318 C187.56 274.6 176.4 263.44 133 256 C176.4 248.56 187.56 237.4 195 194 Z" fill="#0e0e12"/>
+    <path d="M395 236 C397.4 250 401 253.6 415 256 C401 258.4 397.4 262 395 276 C392.6 262 389 258.4 375 256 C389 253.6 392.6 250 395 236 Z" fill="#0e0e12"/>
+  </g>
+</svg>
+  <svg x="158" y="390" width="64" height="64" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(-14 256 256)">
+    <path d="M84 150 H310 A24 24 0 0 0 358 150 H428 A28 28 0 0 1 456 178 V334 A28 28 0 0 1 428 362 H358 A24 24 0 0 0 310 362 H84 A28 28 0 0 1 56 334 V178 A28 28 0 0 1 84 150 Z" fill="#ffc23d"/>
+    <line x1="334" y1="186" x2="334" y2="326" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M195 194 C202.44 237.4 213.6 248.56 257 256 C213.6 263.44 202.44 274.6 195 318 C187.56 274.6 176.4 263.44 133 256 C176.4 248.56 187.56 237.4 195 194 Z" fill="#0e0e12"/>
+    <path d="M395 236 C397.4 250 401 253.6 415 256 C401 258.4 397.4 262 395 276 C392.6 262 389 258.4 375 256 C389 253.6 392.6 250 395 236 Z" fill="#0e0e12"/>
+  </g>
+</svg>
+  <text x="190" y="500" text-anchor="middle" font-family="Helvetica, Arial" font-size="26" font-weight="700" fill="#f4f4f6">A · Billet</text>
+  <svg x="390" y="60" width="300" height="300" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <rect x="96" y="96" width="150" height="150" rx="38" fill="#ff4d8d"/>
+  <rect x="266" y="96" width="150" height="150" rx="38" fill="#ffb020"/>
+  <rect x="96" y="266" width="150" height="150" rx="38" fill="#22d3b6"/>
+  <rect x="266" y="266" width="150" height="150" rx="38" fill="#a78bfa"/>
+  <!-- note de musique -->
+  <rect x="180" y="124" width="13" height="80" rx="5" fill="#0e0e12"/>
+  <ellipse cx="166" cy="204" rx="27" ry="20" transform="rotate(-22 166 204)" fill="#0e0e12"/>
+  <path d="M190 124 C214 130 226 146 222 172 C214 160 204 156 190 156 Z" fill="#0e0e12"/>
+  <!-- clap de cinéma -->
+  <rect x="290" y="170" width="102" height="54" rx="9" fill="#0e0e12"/>
+  <g transform="rotate(-14 292 160)">
+    <rect x="290" y="138" width="102" height="24" rx="6" fill="#0e0e12"/>
+    <path d="M308 138 h14 l-12 24 h-14 Z M338 138 h14 l-12 24 h-14 Z M368 138 h14 l-12 24 h-14 Z" fill="#ffb020"/>
+  </g>
+  <!-- cadre d'expo -->
+  <rect x="122" y="292" width="98" height="98" rx="10" fill="none" stroke="#0e0e12" stroke-width="13"/>
+  <path d="M136 376 L162 342 L180 362 L192 350 L208 376 Z" fill="#0e0e12"/>
+  <circle cx="194" cy="320" r="10" fill="#0e0e12"/>
+  <!-- étoile event -->
+  <path d="M341 287 C347.48 324.8 357.2 334.52 395 341 C357.2 347.48 347.48 357.2 341 395 C334.52 357.2 324.8 347.48 287 341 C324.8 334.52 334.52 324.8 341 287 Z" fill="#0e0e12"/>
+</svg>
+  <svg x="508" y="390" width="64" height="64" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <rect x="96" y="96" width="150" height="150" rx="38" fill="#ff4d8d"/>
+  <rect x="266" y="96" width="150" height="150" rx="38" fill="#ffb020"/>
+  <rect x="96" y="266" width="150" height="150" rx="38" fill="#22d3b6"/>
+  <rect x="266" y="266" width="150" height="150" rx="38" fill="#a78bfa"/>
+  <!-- note de musique -->
+  <rect x="180" y="124" width="13" height="80" rx="5" fill="#0e0e12"/>
+  <ellipse cx="166" cy="204" rx="27" ry="20" transform="rotate(-22 166 204)" fill="#0e0e12"/>
+  <path d="M190 124 C214 130 226 146 222 172 C214 160 204 156 190 156 Z" fill="#0e0e12"/>
+  <!-- clap de cinéma -->
+  <rect x="290" y="170" width="102" height="54" rx="9" fill="#0e0e12"/>
+  <g transform="rotate(-14 292 160)">
+    <rect x="290" y="138" width="102" height="24" rx="6" fill="#0e0e12"/>
+    <path d="M308 138 h14 l-12 24 h-14 Z M338 138 h14 l-12 24 h-14 Z M368 138 h14 l-12 24 h-14 Z" fill="#ffb020"/>
+  </g>
+  <!-- cadre d'expo -->
+  <rect x="122" y="292" width="98" height="98" rx="10" fill="none" stroke="#0e0e12" stroke-width="13"/>
+  <path d="M136 376 L162 342 L180 362 L192 350 L208 376 Z" fill="#0e0e12"/>
+  <circle cx="194" cy="320" r="10" fill="#0e0e12"/>
+  <!-- étoile event -->
+  <path d="M341 287 C347.48 324.8 357.2 334.52 395 341 C357.2 347.48 347.48 357.2 341 395 C334.52 357.2 324.8 347.48 287 341 C324.8 334.52 334.52 324.8 341 287 Z" fill="#0e0e12"/>
+</svg>
+  <text x="540" y="500" text-anchor="middle" font-family="Helvetica, Arial" font-size="26" font-weight="700" fill="#f4f4f6">B · 4 pictos</text>
+  <svg x="740" y="60" width="300" height="300" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(12 256 256)">
+    <path d="M104 140 H298 A22 22 0 0 0 342 140 H418 A28 28 0 0 1 446 168 V312 A28 28 0 0 1 418 340 H342 A22 22 0 0 0 298 340 H104 A28 28 0 0 1 76 312 V168 A28 28 0 0 1 104 140 Z" fill="#a78bfa"/>
+  </g>
+  <g transform="rotate(-12 256 280)">
+    <path d="M84 176 H294 A22 22 0 0 0 338 176 H408 A28 28 0 0 1 436 204 V352 A28 28 0 0 1 408 380 H338 A22 22 0 0 0 294 380 H84 A28 28 0 0 1 56 352 V204 A28 28 0 0 1 84 176 Z" fill="#ff4d8d"/>
+    <line x1="316" y1="210" x2="316" y2="346" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M186 220 C192.96 260.6 203.4 271.04 244 278 C203.4 284.96 192.96 295.4 186 336 C179.04 295.4 168.6 284.96 128 278 C168.6 271.04 179.04 260.6 186 220 Z" fill="#fff"/>
+  </g>
+</svg>
+  <svg x="858" y="390" width="64" height="64" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <g transform="rotate(12 256 256)">
+    <path d="M104 140 H298 A22 22 0 0 0 342 140 H418 A28 28 0 0 1 446 168 V312 A28 28 0 0 1 418 340 H342 A22 22 0 0 0 298 340 H104 A28 28 0 0 1 76 312 V168 A28 28 0 0 1 104 140 Z" fill="#a78bfa"/>
+  </g>
+  <g transform="rotate(-12 256 280)">
+    <path d="M84 176 H294 A22 22 0 0 0 338 176 H408 A28 28 0 0 1 436 204 V352 A28 28 0 0 1 408 380 H338 A22 22 0 0 0 294 380 H84 A28 28 0 0 1 56 352 V204 A28 28 0 0 1 84 176 Z" fill="#ff4d8d"/>
+    <line x1="316" y1="210" x2="316" y2="346" stroke="#0e0e12" stroke-width="9" stroke-dasharray="1 20" stroke-linecap="round"/>
+    <path d="M186 220 C192.96 260.6 203.4 271.04 244 278 C203.4 284.96 192.96 295.4 186 336 C179.04 295.4 168.6 284.96 128 278 C168.6 271.04 179.04 260.6 186 220 Z" fill="#fff"/>
+  </g>
+</svg>
+  <text x="890" y="500" text-anchor="middle" font-family="Helvetica, Arial" font-size="26" font-weight="700" fill="#f4f4f6">C · Pile de billets</text>
+</svg>

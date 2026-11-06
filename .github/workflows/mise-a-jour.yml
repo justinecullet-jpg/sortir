@@ -1,0 +1,60 @@
+# Robot de l'app : chaque jour, il récupère les nouvelles sorties et republie le site.
+# Il tourne sur les serveurs de GitHub (gratuit), même quand ton ordinateur est éteint.
+
+name: Import des sorties et mise en ligne
+
+on:
+  schedule:
+    # Heures en UTC : 4h et 15h UTC = 5h et 16h à Paris en hiver (6h et 17h en été).
+    - cron: '0 4,15 * * *'
+  push:
+    branches: [main]
+  workflow_dispatch: # bouton « Run workflow » pour lancer un import à la main
+
+permissions:
+  contents: write # enregistrer ingest/first_seen.json (mémoire des « nouveautés »)
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Importer les sorties
+        run: node ingest/run.mjs
+
+      - name: Mémoriser les nouveautés
+        run: |
+          git config user.name "sortir-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ingest/first_seen.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Import du $(TZ=Europe/Paris date '+%d/%m/%Y %Hh%M')"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  publier:
+    needs: import
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4

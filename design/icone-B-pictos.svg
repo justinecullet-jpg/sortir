@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0e0e12"/>
+  <rect x="96" y="96" width="150" height="150" rx="38" fill="#ff4d8d"/>
+  <rect x="266" y="96" width="150" height="150" rx="38" fill="#ffb020"/>
+  <rect x="96" y="266" width="150" height="150" rx="38" fill="#22d3b6"/>
+  <rect x="266" y="266" width="150" height="150" rx="38" fill="#a78bfa"/>
+  <!-- note de musique -->
+  <rect x="180" y="124" width="13" height="80" rx="5" fill="#0e0e12"/>
+  <ellipse cx="166" cy="204" rx="27" ry="20" transform="rotate(-22 166 204)" fill="#0e0e12"/>
+  <path d="M190 124 C214 130 226 146 222 172 C214 160 204 156 190 156 Z" fill="#0e0e12"/>
+  <!-- clap de cinéma -->
+  <rect x="290" y="170" width="102" height="54" rx="9" fill="#0e0e12"/>
+  <g transform="rotate(-14 292 160)">
+    <rect x="290" y="138" width="102" height="24" rx="6" fill="#0e0e12"/>
+    <path d="M308 138 h14 l-12 24 h-14 Z M338 138 h14 l-12 24 h-14 Z M368 138 h14 l-12 24 h-14 Z" fill="#ffb020"/>
+  </g>
+  <!-- cadre d'expo -->
+  <rect x="122" y="292" width="98" height="98" rx="10" fill="none" stroke="#0e0e12" stroke-width="13"/>
+  <path d="M136 376 L162 342 L180 362 L192 350 L208 376 Z" fill="#0e0e12"/>
+  <circle cx="194" cy="320" r="10" fill="#0e0e12"/>
+  <!-- étoile event -->
+  <path d="M341 287 C347.48 324.8 357.2 334.52 395 341 C357.2 347.48 347.48 357.2 341 395 C334.52 357.2 324.8 347.48 287 341 C324.8 334.52 334.52 324.8 341 287 Z" fill="#0e0e12"/>
+</svg>
