@@ -10,13 +10,13 @@
 
 | ✔ | Action | Qui |
 |---|---|---|
-| ☐ | Créer un compte GitHub **perso** (gratuit, github.com/signup), pas celui de VOD Factory | toi |
-| ☐ | Te connecter dans le terminal (`gh auth login`) : je te guide | toi |
-| ☐ | Créer le dépôt, publier, vérifier le robot d'import (2 fois par jour) | moi |
+| ☑ | Créer un compte GitHub **perso** (gratuit, github.com/signup), pas celui de VOD Factory | toi |
+| ☑ | Jeton d'accès créé et collé dans le terminal (expire le 04/02/2027) | toi |
+| ☑ | Créer le dépôt, publier, vérifier le robot d'import (2 fois par jour) | moi |
 | ☐ | Ajouter l'app à l'écran d'accueil de ton téléphone et l'utiliser 3 jours | toi |
 | ☐ | Choisir l'icône (planche `design/comparatif-icones-2.png`) | toi |
 
-L'adresse sera du type `https://<ton-pseudo>.github.io/sortir/`. Elle **changera** au lancement public (étape 2) : c'est sans gravité tant que seuls quelques potes l'utilisent.
+✅ **En ligne depuis le 06/11/2026 : https://justinecullet-jpg.github.io/sortir/** Elle **changera** au lancement public (étape 2) : c'est sans gravité tant que seuls quelques potes l'utilisent.
 
 ## Étape 1 · Semaines 1 à 3 : bêta privée (0 €)
 

@@ -44,9 +44,11 @@ python3 -m http.server 5173 -d public      # puis ouvrir http://localhost:5173
 
 Pour tester en vrai sur ton téléphone, il faut mettre l'app en ligne : les liens partagés pointent vers l'adresse de l'app, donc `localhost` ne marche que sur ton ordinateur.
 
-## Mise en ligne et import automatique (prêt, en attente du compte GitHub)
+## Mise en ligne et import automatique (en ligne depuis le 06/11/2026)
 
-Hébergement : **GitHub Pages**, gratuit pour un dépôt public. L'adresse sera du type `https://<ton-pseudo>.github.io/sortir/`.
+👉 **https://justinecullet-jpg.github.io/sortir/** · dépôt : https://github.com/justinecullet-jpg/sortir · suivi du robot : onglet *Actions* du dépôt.
+
+Hébergement : **GitHub Pages**, gratuit pour un dépôt public. Le jeton d'accès utilisé pour publier depuis le Mac expire le **04/02/2027** : il faudra le régénérer (même réglages) à cette date.
 
 Le robot `.github/workflows/mise-a-jour.yml` tourne sur les serveurs de GitHub, même ordinateur éteint :
 1. **deux fois par jour** (5h et 16h à Paris en hiver), à chaque modification du code, ou à la main (bouton *Run workflow* dans l'onglet *Actions*) ;
